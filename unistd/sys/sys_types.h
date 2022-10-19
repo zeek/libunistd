@@ -22,12 +22,12 @@ typedef int uid_t;
 typedef int Atom;
 
 enum
-{	F_DUPFD, 
+{	F_DUPFD,
 	F_GETFD,
-	F_SETFD, 
-	F_GETFL, 
-	F_SETFL, 
-	F_GETLK, 
+	F_SETFD,
+	F_GETFL,
+	F_SETFL,
+	F_GETLK,
 	F_SETLK,
 	F_SETLKW,
 	FD_CLOEXEC

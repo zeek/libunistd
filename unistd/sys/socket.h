@@ -2,6 +2,7 @@
 #define socket_h
 
 #define WIN32_LEAN_AND_MEAN
+#define CONST const
 #include <winsock2.h>
 #include <windows.h>
 #include <Mstcpip.h>
@@ -9,6 +10,14 @@
 #include <stdint.h>
 #include "stub.h"
 #include "cfunc.h"
+
+#undef CONST
+
+#ifdef __cplusplus
+extern "C" {
+#else
+#define inline __inline
+#endif
 
 typedef uint32_t sa_family_t;
 
@@ -18,7 +27,7 @@ struct iovec
 {	int junk;
 };
 
-struct msghdr 
+struct msghdr
 {	void* msg_name;
 	socklen_t msg_namelen;
 	struct iovec* msg_iov;
@@ -28,9 +37,19 @@ struct msghdr
 	int msg_flags;
 };
 
-typedef int caddr_t;
+typedef uint8_t* caddr_t;
 
 // The ioctlsocket function and the WSAIoctl function handle socket functions that were performed by IOCTL and fcntl in BSD
+
+inline
+int inet_aton(const char* cp, struct in_addr* inp)
+{	return inet_pton(AF_INET, cp, inp);
+}
+
+
+#ifdef __cplusplus
+}
+#endif
 
 /* FYI, how to do TCP_KEEPCNT in linux/windows:
 #ifndef _WIN32
