@@ -40,6 +40,7 @@
 #include <sys/utime.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/random.h>
 #include <assert.h>
 #include <inttypes.h>
 #include <io.h>
@@ -164,6 +165,8 @@ CFUNC ssize_t getline(char** lineptr, size_t* n,FILE* stream);
 CFUNC ssize_t getdelim(char** lineptr, size_t* n,int delim, FILE* stream);
 CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 CFUNC ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset);
+CFUNC int setlinebuf(FILE *stream);
+CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 
 //#define strlen unistd_safe_strlen
 //#define inet_ntop InetNtop
@@ -190,6 +193,7 @@ CFUNC ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset);
 #define STDIN_FILENO _fileno(stdin)
 #define STDOUT_FILENO _fileno(stdout)
 #define STDERR_FILENO _fileno(stderr)
+
 // causes issues with math.h:
 //#define rint(x) floor ((x) + 0.5)
 //#define lround floor
@@ -230,5 +234,33 @@ CFUNC ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset);
 #define spawnv _spawnv
 #define SSIZE_MAX SIZE_MAX
 #define SIGTRAP 23
+
+// Defined unsupported macro as empty.
+#define __builtin_unreachable()
+
+// Remove defines that cause collisions.
+#undef min
+#undef max
+#undef close
+#undef CONST
+#undef ERROR
+#undef IGNORE
+#undef STATUS_INVALID_HANDLE
+#undef STATUS_INVALID_PARAMETER
+#undef Yield
+#undef CompareString
+
+// Workaround negative character values that caused asserts
+#define isalpha(ch) isalpha((unsigned char)(ch))
+#define isupper(ch) isupper((unsigned char)(ch))
+#define islower(ch) islower((unsigned char)(ch))
+#define isdigit(ch) isdigit((unsigned char)(ch))
+#define isspace(ch) isspace((unsigned char)(ch))
+#define ispunct(ch) ispunct((unsigned char)(ch))
+#define isblank(ch) isblank((unsigned char)(ch))
+#define isalnum(ch) isalnum((unsigned char)(ch))
+#define isprint(ch) isprint((unsigned char)(ch))
+#define isgraph(ch) isgraph((unsigned char)(ch))
+#define iscntrl(ch) iscntrl((unsigned char)(ch))
 
 #endif
