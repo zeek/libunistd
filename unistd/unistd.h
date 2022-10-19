@@ -50,7 +50,7 @@
 #include "cfunc.h"
 #include "stub.h"
 
-inline 
+inline
 const char* GetUnistdVersion()
 {	return "v1.3 2024/06/30"; // git tag -a v1.3 -m "2024/06/30"
 }
@@ -62,11 +62,11 @@ CFUNC int optopt;
 
 typedef long long useconds_t;
 
-enum 
+enum
 {	F_LOCK=1,
 	F_TLOCK,
 	F_ULOCK,
-	F_TEST 
+	F_TEST
 };
 
 #ifdef _BSD_SOURCE
@@ -74,7 +74,7 @@ CFUNC pid_t getpgrp(pid_t pid); /* BSD version */
 #else
 CFUNC pid_t getpgrp(); /* POSIX.1 version */
 #endif
-CFUNC int setpgrp(pid_t pid, pid_t pgid); 
+CFUNC int setpgrp(pid_t pid, pid_t pgid);
 //CFUNC int uni_open(const char* filename,unsigned oflag,int mode);
 CFUNC int uni_open(const char* filename, unsigned oflag,...);
 CFUNC int fcntl(int handle, int mode,...);
@@ -89,10 +89,10 @@ CFUNC int strncasecmp(const char *s1, const char *s2, size_t n);
 CFUNC FILE *popen(const char *command, const char *type);
 CFUNC int pclose(FILE *stream);
 CFUNC int kill(pid_t p, int x);
-CFUNC int S_ISCHR(int v); 
-CFUNC int S_ISBLK(int v); 
-CFUNC int S_ISFIFO(int v); 
-CFUNC int S_ISSOCK(int v); 
+CFUNC int S_ISCHR(int v);
+CFUNC int S_ISBLK(int v);
+CFUNC int S_ISFIFO(int v);
+CFUNC int S_ISSOCK(int v);
 CFUNC pid_t gettid();
 CFUNC int setgid(gid_t g);
 CFUNC int setuid(uid_t g);
@@ -163,6 +163,7 @@ CFUNC char* strptime(const char* s, const char* format,struct tm* tm);
 CFUNC ssize_t getline(char** lineptr, size_t* n,FILE* stream);
 CFUNC ssize_t getdelim(char** lineptr, size_t* n,int delim, FILE* stream);
 CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
+CFUNC ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset);
 
 //#define strlen unistd_safe_strlen
 //#define inet_ntop InetNtop
@@ -172,8 +173,8 @@ CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 #define pow10(x) pow(x,10)
 #define alloca _alloca
 /* use with limits.h */
-#define LONG_LONG_MAX LLONG_MAX     
-#define LONG_LONG_MIN LLONG_MIN     
+#define LONG_LONG_MAX LLONG_MAX
+#define LONG_LONG_MIN LLONG_MIN
 #define strdup _strdup
 #define vsnprintf _vsnprintf
 //#define sscanf uni_sscanf
@@ -231,4 +232,3 @@ CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 #define SIGTRAP 23
 
 #endif
-

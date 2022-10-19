@@ -20,7 +20,7 @@ int setpgrp() /* System V version */
 {	STUB_0(setpgrp);
 }
 
-int setpgrp(pid_t pid, pid_t pgid) /* BSD version */ 
+int setpgrp(pid_t pid, pid_t pgid) /* BSD version */
 {	(void)pid;
 	(void)pgid;
 	STUB_0(setpgrp);
@@ -120,7 +120,7 @@ int strncasecmp(const char *s1, const char *s2, size_t n)
 #endif
 
 FILE *popen(const char *command, const char *type)
-{	
+{
 #ifdef _DEBUG
 	printf("popen(%s,%s)\n",command,type);
 #endif
@@ -137,22 +137,22 @@ int kill(pid_t p, int x)
 	return -1;
 }
 
-int S_ISCHR(int v) 
-{	(void)v;
-	return 0; 
-}
-
-int S_ISBLK(int v) 
+int S_ISCHR(int v)
 {	(void)v;
 	return 0;
 }
 
-int S_ISFIFO(int v) 
+int S_ISBLK(int v)
 {	(void)v;
 	return 0;
 }
 
-int S_ISSOCK(int v) 
+int S_ISFIFO(int v)
+{	(void)v;
+	return 0;
+}
+
+int S_ISSOCK(int v)
 {	(void)v;
 	return 0;
 }
@@ -522,7 +522,7 @@ int usleep(useconds_t usec)
 	freq.QuadPart = 0;
 	QueryPerformanceCounter(&time1);
 	QueryPerformanceFrequency(&freq);
-	do 
+	do
 	{	QueryPerformanceCounter(&time2);
 	} while((time2.QuadPart-time1.QuadPart) < usec);
 	return 0;
@@ -541,24 +541,39 @@ off_t ftello(FILE *stream)
 {	return ftell(stream);
 }
 
-int vasprintf(char **strp, const char *fmt, va_list ap) 
+int vasprintf(char **strp, const char *fmt, va_list ap)
 {   va_list ap_copy;
     va_copy(ap_copy, ap);
     int size = vsnprintf(NULL, 0, fmt, ap_copy);
     va_end(ap_copy);
-    if (size < 0) 
+    if (size < 0)
 	{	return -1; // Error
     }
     *strp = (char *)malloc(size + 1); // +1 for the null terminator
-    if (*strp == NULL) 
+    if (*strp == NULL)
 	{	return -1; // Memory allocation failed
     }
     // format the string into the allocated buffer
     int result = vsnprintf(*strp, size + 1, fmt, ap);
-    if (result < 0) 
+    if (result < 0)
 	{   free(*strp);
         *strp = NULL;
         return -1; // Error
     }
 	return result;
+}
+
+ssize_t pwrite(int fildes, const void *buf, size_t nbyte, size_t offset)
+{	if (nbyte == 0)
+	{	return 0;
+	}
+	OVERLAPPED overlapped;
+	memset(&overlapped, 0, sizeof(overlapped));
+	overlapped.Offset = static_cast<DWORD>(offset);
+	overlapped.OffsetHigh = offset >> 32;
+	DWORD written;
+	if (!WriteFile((HANDLE)_get_osfhandle(fildes), buf, static_cast<DWORD>(nbyte), &written, &overlapped))
+	{	return -1;
+	}
+	return written;
 }
