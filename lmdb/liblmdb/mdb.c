@@ -39,40 +39,40 @@
 #define _FILE_OFFSET_BITS	64
 #endif
 #ifdef _WIN32
-#include <malloc.h>
-#include <windows.h>
-#include <wchar.h>				/* get wcscpy() */
+	#include <malloc.h>
+	#include <windows.h>
+	#include <wchar.h>				/* get wcscpy() */
 
-/** getpid() returns int; MinGW defines pid_t but MinGW64 typedefs it
- *  as int64 which is wrong. MSVC doesn't define it at all, so just
- *  don't use it.
- */
-#define MDB_PID_T	int
-#define MDB_THR_T	DWORD
-#include <sys/types.h>
-#include <sys/stat.h>
-#ifdef __GNUC__
-# include <sys/param.h>
+	/** getpid() returns int; MinGW defines pid_t but MinGW64 typedefs it
+	 *  as int64 which is wrong. MSVC doesn't define it at all, so just
+	 *  don't use it.
+	 */
+	#define MDB_PID_T	int
+	#define MDB_THR_T	DWORD
+	#include <../ucrt/sys/types.h>
+	#include <sys/stat.h>
+	#ifdef __GNUC__
+	# include <sys/param.h>
+	#else
+	# define LITTLE_ENDIAN	1234
+	# define BIG_ENDIAN	4321
+	# define BYTE_ORDER	LITTLE_ENDIAN
+	# ifndef SSIZE_MAX
+	#  define SSIZE_MAX	INT_MAX
+	# endif
+	#endif
 #else
-# define LITTLE_ENDIAN	1234
-# define BIG_ENDIAN	4321
-# define BYTE_ORDER	LITTLE_ENDIAN
-# ifndef SSIZE_MAX
-#  define SSIZE_MAX	INT_MAX
-# endif
-#endif
-#else
-#include <sys/types.h>
-#include <sys/stat.h>
-#define MDB_PID_T	pid_t
-#define MDB_THR_T	pthread_t
-#include <sys/param.h>
-#include <sys/uio.h>
-#include <sys/mman.h>
-#ifdef HAVE_SYS_FILE_H
-#include <sys/file.h>
-#endif
-#include <fcntl.h>
+	#include <sys/types.h>
+	#include <sys/stat.h>
+	#define MDB_PID_T	pid_t
+	#define MDB_THR_T	pthread_t
+	#include <sys/param.h>
+	#include <sys/uio.h>
+	#include <sys/mman.h>
+	#ifdef HAVE_SYS_FILE_H
+	#include <sys/file.h>
+	#endif
+	#include <fcntl.h>
 #endif
 
 #if defined(__mips) && defined(__linux)
@@ -104,7 +104,6 @@ extern int cacheflush(char *addr, int nbytes, int cache);
 
 #ifdef _MSC_VER
 #include <io.h>
-typedef SSIZE_T	ssize_t;
 #else
 #include <unistd.h>
 #endif

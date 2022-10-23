@@ -6,7 +6,7 @@
 #define resource_h
 
 #include "../../portable/stub.h"
-#include <sys/socket.h>
+#include <unistd.h>
 #include <psapi.h>
 
 #ifdef __cplusplus
