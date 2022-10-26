@@ -49,7 +49,7 @@
  */
 #define MDB_PID_T	int
 #define MDB_THR_T	DWORD
-#include <sys/types.h>
+#include <../ucrt/sys/types.h>
 #include <sys/stat.h>
 #ifdef __GNUC__
 # include <sys/param.h>
@@ -104,7 +104,6 @@ extern int cacheflush(char *addr, int nbytes, int cache);
 
 #ifdef _MSC_VER
 #include <io.h>
-typedef SSIZE_T	ssize_t;
 #else
 #include <unistd.h>
 #endif
