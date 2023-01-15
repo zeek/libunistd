@@ -233,7 +233,8 @@ CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 #undef CompareString
 #undef NO_ERROR
 
-// Workaround negative character values that caused asserts
+#if _MSC_VER < 1930
+// Workaround negative character values that caused asserts on VS 2019 and below
 #define isalpha(ch) isalpha((unsigned char)(ch))
 #define isupper(ch) islower((unsigned char)(ch))
 #define islower(ch) islower((unsigned char)(ch))
@@ -245,6 +246,6 @@ CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 #define isprint(ch) isprint((unsigned char)(ch))
 #define isgraph(ch) isgraph((unsigned char)(ch))
 #define iscntrl(ch) iscntrl((unsigned char)(ch))
-
 #endif
 
+#endif
