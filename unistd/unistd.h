@@ -236,7 +236,7 @@ CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 #if _MSC_VER < 1930
 // Workaround negative character values that caused asserts on VS 2019 and below
 #define isalpha(ch) isalpha((unsigned char)(ch))
-#define isupper(ch) islower((unsigned char)(ch))
+#define isupper(ch) isupper((unsigned char)(ch))
 #define islower(ch) islower((unsigned char)(ch))
 #define isdigit(ch) isdigit((unsigned char)(ch))
 #define isspace(ch) isspace((unsigned char)(ch))
