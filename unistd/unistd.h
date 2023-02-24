@@ -30,7 +30,6 @@
 #include <direct.h>
 #include <winerror.h>
 #include <memory.h>
-#include <mswsock.h> //for SO_UPDATE_ACCEPT_CONTEXT
 #include <Ws2tcpip.h>//for InetNtop
 #include <ctype.h>
 #include <time.h>
@@ -62,6 +61,7 @@ CFUNC int opterr;
 CFUNC int optopt;
 
 typedef long long useconds_t;
+typedef unsigned int  uint;
 
 enum
 {	F_LOCK=1,
@@ -76,6 +76,8 @@ CFUNC pid_t getpgrp(pid_t pid); /* BSD version */
 CFUNC pid_t getpgrp(); /* POSIX.1 version */
 #endif
 CFUNC int setpgrp(pid_t pid, pid_t pgid);
+CFUNC int read(int fh, void* buf, unsigned count);
+CFUNC int pipe(int pipes[2]);
 //CFUNC int uni_open(const char* filename,unsigned oflag,int mode);
 CFUNC int uni_open(const char* filename, unsigned oflag,...);
 CFUNC int fcntl(int handle, int mode,...);
@@ -154,6 +156,7 @@ CFUNC pid_t vfork();
 CFUNC double drand48();
 CFUNC void srand48(long int seedval);
 CFUNC long int random(void);
+CFUNC void srandom(unsigned int seed);
 CFUNC int setenv(const char *name, const char *value, int overwrite);
 CFUNC int unsetenv(const char *name);
 CFUNC int truncate(const char *path, off_t length);
@@ -222,6 +225,7 @@ CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 #define   __attribute__(x)
 #endif
 //__attribute__((format (printf, 1, 2)))
+#define   __attribute__(x)
 #define mkdir mkdir2
 #define fileno _fileno
 #define open uni_open
@@ -249,6 +253,7 @@ CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 #undef STATUS_INVALID_PARAMETER
 #undef Yield
 #undef CompareString
+#undef NO_ERROR
 
 // Workaround negative character values that caused asserts
 #define isalpha(ch) isalpha((unsigned char)(ch))
