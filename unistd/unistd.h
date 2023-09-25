@@ -170,6 +170,7 @@ CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 CFUNC ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset);
 CFUNC int setlinebuf(FILE *stream);
 CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
+CFUNC int aprintf(char **ret, const char *format, ...);
 
 //#define strlen unistd_safe_strlen
 //#define inet_ntop InetNtop
