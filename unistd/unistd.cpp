@@ -579,3 +579,11 @@ int vasprintf(char **ptr, const char *format, va_list arg)
 	*ptr = p;
 	return rv;
 }
+
+int asprintf(char **ret, const char *format, ...)
+{	va_list ap;
+	va_start(ap, format);
+	int retval = vasprintf(strp, format, ap);
+	va_end(ap);
+	return retval;
+}
