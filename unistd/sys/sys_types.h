@@ -15,11 +15,17 @@ typedef int sigval_t;
 typedef int sigset_t;
 typedef unsigned short ushort;
 typedef	int key_t;
-typedef int ssize_t;
 typedef unsigned short mode_t;
 typedef int gid_t;
 typedef int uid_t;
 typedef int Atom;
+
+#if defined(_MSC_VER)
+#include <basetsd.h>
+typedef SSIZE_T ssize_t;
+#else
+typedef int ssize_t;
+#endif
 
 #ifndef _WINSOCK2API_
 // Winsock2 already defines these typedefs.
