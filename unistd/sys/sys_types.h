@@ -15,6 +15,7 @@ typedef int sigval_t;
 typedef int sigset_t;
 typedef unsigned short ushort;
 typedef	int key_t;
+typedef long long ssize_t;
 typedef unsigned short mode_t;
 typedef int gid_t;
 typedef int uid_t;
@@ -37,12 +38,12 @@ typedef unsigned long   u_long;
 #endif
 
 enum
-{	F_DUPFD, 
+{	F_DUPFD,
 	F_GETFD,
-	F_SETFD, 
-	F_GETFL, 
-	F_SETFL, 
-	F_GETLK, 
+	F_SETFD,
+	F_GETFL,
+	F_SETFL,
+	F_GETLK,
 	F_SETLK,
 	F_SETLKW,
 	FD_CLOEXEC

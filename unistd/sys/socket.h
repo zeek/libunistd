@@ -10,17 +10,10 @@
 #include <Ws2tcpip.h>
 #undef VOID
 #include <stdint.h>
-#include "../portable/stub.h"
-#undef CONST
-
-#ifdef __cplusplus
-extern "C" {
-#else
-#define inline __inline
-#endif
+#include "stub.h"
+#include "cfunc.h"
 
 typedef uint32_t sa_family_t;
-
 
 // The iovec structure shall be defined as described in <sys/uio.h> .
 
@@ -28,7 +21,7 @@ struct iovec
 {	int junk;
 };
 
-struct msghdr 
+struct msghdr
 {	void* msg_name;
 	socklen_t msg_namelen;
 	struct iovec* msg_iov;
@@ -46,11 +39,6 @@ inline
 int inet_aton(const char* cp, struct in_addr* inp)
 {	return inet_pton(AF_INET, cp, inp);
 }
-
-
-#ifdef __cplusplus
-}
-#endif
 
 /* FYI, how to do TCP_KEEPCNT in linux/windows:
 #ifndef _WIN32
