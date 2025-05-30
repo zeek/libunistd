@@ -605,7 +605,7 @@ int vasprintf(char **ptr, const char *format, va_list arg)
 int asprintf(char **ret, const char *format, ...)
 {	va_list ap;
 	va_start(ap, format);
-	int retval = vasprintf(strp, format, ap);
+	int retval = vasprintf(ret, format, ap);
 	va_end(ap);
 	return retval;
 }
