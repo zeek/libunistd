@@ -254,6 +254,7 @@ CFUNC int aprintf(char **ret, const char *format, ...);
 #undef Yield
 #undef CompareString
 #undef NO_ERROR
+#undef write
 
 #if _MSC_VER < 1930
 // Workaround negative character values that caused asserts on VS 2019 and below
