@@ -7,12 +7,22 @@
 
 #include <stdlib.h>
 
-#define HFIXEDSZ 12
-
-#define NS_IN6ADDRSZ 16
-#define NS_INADDRSZ  4
-#define NS_INT16SZ   2
+#define NS_PACKETSZ  512
 #define NS_MAXDNAME  1025
+#define NS_MAXMSG    65535
+#define NS_MAXCDNAME 255
+#define NS_MAXLABEL  63
+#define NS_HFIXEDSZ  12
+#define NS_QFIXEDSZ  4
+#define NS_RRFIXEDSZ 10
+#define NS_INT32SZ   4
+#define NS_INT16SZ   2
+#define NS_INADDRSZ  4
+#define NS_IN6ADDRSZ 16
+
+#define HFIXEDSZ NS_HFIXEDSZ
+#define QFIXEDSZ NS_QFIXEDSZ
+#define RRFIXEDSZ NS_RRFIXEDSZ
 
 #define T_A    1
 #define T_PTR  12
