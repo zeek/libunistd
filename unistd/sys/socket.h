@@ -1,34 +1,33 @@
-#ifndef socket_h
-#define socket_h
+﻿// sys/socket.h
 
+#ifndef sys_socket_h
+#define sys_socket_h
+
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
-#define CONST const
-#include <winsock2.h>
+#endif
+// Windows SDKs (Vista → 11) changed rule, include windows.h first:
+// <windows.h> no longer includes <winsock.h>
 #include <windows.h>
-#define VOID void
+#include <winsock2.h>
 #include <Mstcpip.h>
 #include <Ws2tcpip.h>
 #undef VOID
 #include <stdint.h>
-#include "../portable/stub.h"
-#undef CONST
+#include "stub.h"
+#include "cfunc.h"
+#include "uio.h"
+#include "posix_types.h"
 
-#ifdef __cplusplus
-extern "C" {
-#else
-#define inline __inline
-#endif
+struct unix_socket {
+    int is_server;
+    char path[UNIX_PATH_MAX];
+    HANDLE handle;
+};
 
 typedef uint32_t sa_family_t;
 
-
-// The iovec structure shall be defined as described in <sys/uio.h> .
-
-struct iovec
-{	int junk;
-};
-
-struct msghdr 
+struct msghdr
 {	void* msg_name;
 	socklen_t msg_namelen;
 	struct iovec* msg_iov;
@@ -40,17 +39,13 @@ struct msghdr
 
 typedef uint8_t* caddr_t;
 
+// ssize_t send(int sockfd, const void *buf, size_t size, int flags)
+
 // The ioctlsocket function and the WSAIoctl function handle socket functions that were performed by IOCTL and fcntl in BSD
 
-inline
-int inet_aton(const char* cp, struct in_addr* inp)
+inline int inet_aton(const char* cp, struct in_addr* inp)
 {	return inet_pton(AF_INET, cp, inp);
 }
-
-
-#ifdef __cplusplus
-}
-#endif
 
 /* FYI, how to do TCP_KEEPCNT in linux/windows:
 #ifndef _WIN32

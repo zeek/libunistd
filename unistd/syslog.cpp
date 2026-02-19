@@ -11,7 +11,7 @@
 #include <crtdbg.h>
 #endif
 // debugapi.h
-#include "../portable/SystemLog.h"
+#include "SystemLog.h"
 
 #include <string>
 

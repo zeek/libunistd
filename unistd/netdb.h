@@ -5,7 +5,7 @@
 #ifndef netdb_h
 #define netdb_h
 
-#include <unistd.h>
+#include "unistd.h"
 #include "cfunc.h"
 
 CFUNC struct hostent *gethostbyname2(const char *name, int af);

@@ -3,10 +3,10 @@
 #ifndef sys_ipc_h
 #define sys_ipc_h
 
-#include <sys/sys_types.h>
 #include <sys/stat.h>
 #include <memory.h>
-#include "../../portable/stub.h"
+#include "sys/types.h"
+#include "../stub.h"
 
 struct ipc_perm 
 {	uid_t uid;

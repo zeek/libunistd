@@ -4,7 +4,6 @@
 
 #include <unistd.h>
 #include <errno.h>
-
 #include "file.h"
 
 BOOL file_size(HANDLE h, DWORD * lower, DWORD * upper)

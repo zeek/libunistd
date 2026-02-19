@@ -1,0 +1,165 @@
+git log v1.2..HEAD --oneline > libunistd-v1-3.log
+
+8b9d701 Added vasprintf
+8ab9bd6 Merge branch 'master' of https://github.com/robinrowe/libunistd
+8dc1661 Added getline.cpp
+aa70d7b Set up CI with Azure Pipelines
+ff79134 FieldMap fix
+4277f54 Merge branch 'master' of https://github.com/robinrowe/libunistd
+3da7c9c Removed lmdb to https://github.com/robinrowe/lmdb
+5dd40e9 Update README.md
+42ce35f Deleted unused files, cmaker moved to gitlab
+0e3fc2f typedef dirent
+e5f69a1 Merge branch 'master' of https://github.com/robinrowe/libunistd
+416e4a2 Updated LMDB to latest from OpenLDAP repo
+572ea70 Merge pull request #12 from timwoj/regex
+6751f64 Reimplement regex library using std::regex underneath
+a21c4da Fixes to strings.h
+300a069 Fixed ffs() inlines
+16d9c1a Merge branch 'master' of https://github.com/robinrowe/libunistd
+8b3dc70 Added sources.cmake after Wojtulewicz merge
+3460536 Create Contributors.md
+4aef7c8 Update README.md
+923b956 Merge pull request #11 from timwoj/master
+e748fd3 Fix copyright attributes for Tomer Lev
+9202340 Reformat changed files using UniversalIndentGUI
+e7e523c Link to shlwapi from CMakeLists, not via pragma
+7537cd9 Fix error in usage of stub methods
+b5f1f1a Fix copyright attributes for files provided by brimdata
+8786624 Update README.md
+3853f97 Update README.md
+6f320c1 Update README.md
+b43db7c Update README.md
+ceb6d40 Update README.md
+73eb48e Update README.md
+a177733 Update README.md
+020a086 Update README.md
+2c1644c Use stub methods and NULL
+933fe22 Whitespace/formatting cleanup
+f9f775c Use ifndef include guards, use CFUNC
+013dbb6 Update README.md
+7a85d75 Update README.md
+7fa911b Update README.md
+5cd282d Update README.md
+42c4c43 Update README.md
+28a26a3 Add new files to unistd/CMakeLists.txt
+081f4e2 Fix packing bug in 'struct ip'
+32498fe Add empty stub file for netinet/in_systm.h
+55e56b8 Add implmentation of gethostbyname2(3)
+d1a7ba9 Add implementation of getrusage(2) and associated types
+1478cf8 Add implementation of getrandom()
+f99e35b Add implementation of flock(2)
+20f4265 Add netinet/{icmp6,tcp,udp}.h
+9a53615 Add net/if_arp.h for struct arphdr
+1971c08 Add net/ethertypes.h for a few ETHERTYPE_ definitions
+1c7e9bd Add implementation of memmem(3)
+40ac75a Add stubs for fts_open(3), fts_read(3), and fts_close(3)
+daf496a Add implementation of fnmatch(3)
+31718c9 Add arpa/nameser.h
+cfc713e Add implementation of vsyslog()
+69e8722 Merge branch 'think-biq-master'
+b9da591 fixed merge think-big-master (pthread)
+c640fd7 Moved Ws2_32 to CMake from #pragma hack
+ce29fbb cfunc.h, clock_gettime.h, ftw.h, getopt.h, glob.h, pthread.cpp, sem.cpp, unistd.cpp
+1d9e221 restructured header files for consistent presentation of c interface
+2eccc48 removed duplicate include
+cedd884 ignore cmake staging directory
+55ecd80 added option to switch building tests on or off, setting it off by default
+cd7963e Merge branch 'master' of https://github.com/robinrowe/libunistd into master
+ee840b1 Tweaks for better CinePaint support
+f369b69 Update README.md
+b9a2dd5 dlfcn.h update
+b57c1b9 Added getopt, disabled uni_sscanf (broken)
+fe18c84 add sys/param.h
+d23b834 Separate Transaction, only 1 writer per thread allowed
+724a326 Rewrite of LighteningDb wrapper - all new
+b9bbdd8 extern C: gettimeofday pwd
+0336121 shm.h, Big-Number Int128
+c8eeafd Update readme
+f543c10 Update readme
+077bc11 SystemLog update
+c05bd2c BsdSocketServerStartup Linux
+0efab29 add cmaker_legacy.sh
+21c5b56 cmaker_to_cpp.sh now recursive
+0c90fb1 Pump fixes
+8247b38 Linux fixes
+b8fb8ba bsd_string.h
+8f48c7f Linux fixes
+33b069b Linux fixes
+d7a1e6c Linux fixes
+010ab9a Merge branch 'master' of https://github.com/robinrowe/libunistd
+09bd03f App.h Shutdown.cpp
+f70efea Update README.md
+37b540a SystemLog.h improvements
+b029997 SystemLog.h improvements
+2320a27 Add test_logger, fix tty_msg()
+33815f4 Add use-libunistd.cmake
+f526237 syslog improvements
+1540d5b Added syslog.h
+d808b6b Add cmaker_no_spaces.sh, git_upstream.md
+6f0c59d Add cmaker_no_spaces.sh, git_upstream.md
+1817a3f Linux fixes
+f7934d8 cmake config fixes
+35cdc56 cmake config fixes
+573aea5 cmake config fixes
+88f5f03 cmake config fixes
+b47cb00 cmake config fixes
+c0706e6 cmake config fixes
+b77b25b cmake fixes
+de4e05b Cmake download fixes
+c7e2ec1 Cmake download fixes
+9d24416 Cmake fixes
+7234576 Move libraries to same output dir
+86e41e1 portable/CMakeLists.txt typo
+9015e94 Rename xxhash
+dc3c9f6 Rename CMakeLists.txt
+7a0e86d Rename CMakeLists.txt
+351a539 Linux build fixes
+edae3e2 config.cmake fixes
+01d4d0c cmake fixes
+57a13e0 cmake fixes
+a4079a7 cmake libunistd fixes
+8a054dc unistd.h read() warning fix
+aa824ce Add cmaker_redo.sh
+452a8c9 test_m1q_receive typo
+367ffa3 cmaker tweaks
+ad90f26 BsdSocketStartup fixes
+63e2a89 Built in Linux
+d65b218 Cmaker <NAME>, add BsdSocketStartup.cpp, add portable/string.h
+c24dedb Merge branch 'master' of https://github.com/robinrowe/libunistd
+d172eed Add cmaker_all.sh, cmaker_c_to_cpp.sh, cmaker_rename_cpp.sh
+67feb5a Add cmaker_to_cpp.sh
+8002a23 Cmaker creates INSTALL.md
+fbe1946 Cmaker add cmaker_dll.sh
+a8eceb2 CMaker generate CHANGES.md and README.md
+f83fdc9 CMaker generate CHANGES.md and README.md
+e348a57 Updated curl-config.cmake with Windows SSL flag
+c2be907 Add curl-config.cmake
+5adf3a3 Added INSTALL_curl_Windows.md
+a0fd868 Added libssh2-config.cmake
+309f5d2 Merge branch 'master' of https://github.com/robinrowe/libunistd
+fdf2748 Added zlib-config.cmake
+c86162a README.md update
+c064364 README.md update
+bcfeb57 Add Doxyfile
+3ca8f99 Add cmaker_top.sh
+51ba9a8 Add CodingStyle.md
+703578a Add CodingStyle.md
+1aa010b Add README.md
+907f841 Add README.md
+b4c1d78 deleted
+c68b6e2 Add cmaker_project.sh.txt
+2a16075 cmaker LICENSE fixes
+6319a0e Add cmaker_sources.sh: AddPath
+b69ba5d Add cmaker_sources.sh
+215077e Mac has no bash 4
+1da6a91 Cmaker
+a7d1805 Fix CMake incdir paths
+2e18fc9 LMDB OpenLDAP lib update and wrapper v2
+2068239 lmdb::Datum<int,int>
+12e6229 Sqlite 3.25.3 update
+00de806 Updated Sqlite source to latest amalgamation
+d47582f Add FInder.h, scandir.cpp, semaphore1.cpp, rewrite dirent.cpp
+4d2b01d Added linux/limits.h, fixed scandir segfault
+f722d39 Renamed STUB0 STUB_0, sem.h fixes
+c658fba Add sys/sem.h, test/semaphore, SharedMemory.h, FixedQueue.h

@@ -17,7 +17,8 @@ struct SysSems
 	semid_ds semid;
 	std::vector<SysSem> sem;
 	SysSems(size_t size)
-	{	sem.resize(size);
+	{	memset(&semid,0,sizeof(semid));
+		sem.resize(size);
 	}
 	SysSems()
 	{	memset(&semid,0,sizeof(semid));

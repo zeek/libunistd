@@ -6,7 +6,7 @@
 #ifndef termios_h
 #define termios_h
 
-#include "../portable/stub.h"
+#include "stub.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -102,7 +102,9 @@ enum
 {	TIOCMGET,
 	TIOCMSET,
 	TIOCMBIC,
-	TIOCMBIS 
+	TIOCMBIS,
+	TIOCGWINSZ,
+	TIOCSWINSZ
 };
 
 enum
@@ -180,6 +182,13 @@ inline
 int cfsetspeed(struct termios *termios_p, speed_t speed)
 {   STUB_NEG(cfsetspeed);
 }
+
+struct winsize {
+    unsigned short ws_row;    /* rows, in characters */
+    unsigned short ws_col;    /* columns, in characters */
+    unsigned short ws_xpixel; /* width, in pixels (optional) */
+    unsigned short ws_ypixel; /* height, in pixels (optional) */
+};
 
 #if 0
 

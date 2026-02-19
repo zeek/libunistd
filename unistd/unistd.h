@@ -7,25 +7,20 @@
 #ifndef unistd_h
 #define unistd_h
 
-#if  ((defined(_WINDOWS_) || defined(_INC_WINDOWS))) && !defined(WIN32_LEAN_AND_MEAN)
-#error unistd.h must be included before Windows.h!
+#if !defined(_WINSOCK2API_) && defined(_WINSOCKAPI_)
+#error unistd.h must be included before Winsock2.h or Windows.h!
 #endif
 
-//#define _CRT_SECURE_NO_DEPRECATE 
-//#undef _CRT_SECURE_NO_WARNINGS
-//#define _WINSOCK_DEPRECATED_NO_WARNINGS
-#ifndef _CRT_NONSTDC_NO_WARNINGS
-#define _CRT_NONSTDC_NO_WARNINGS
-#endif
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
-#include <WinSock2.h>
+#endif
+#include <windows.h>
+#include <winsock2.h>
 #include <winnt.h>
 #include <corecrt_io.h>
-//#if _MSC_VER == 1900
 #include <vcruntime.h>
 #undef socklen_t
 #include <WS2tcpip.h>
-#include <windows.h>
 #include <math.h>
 #include <fcntl.h>
 #include <process.h> // getpid()
@@ -41,22 +36,35 @@
 #include <ctype.h>
 #include <time.h>
 #include <string.h>
-#include <memory.h>
 #include <signal.h>
 #include <sys/utime.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/random.h>
 #include <assert.h>
 #include <inttypes.h>
-#include <io.h>
-#include "../portable/bsd_string.h"
+#include "bsd/string.h"
 #include "sigaction.h"
 #include "gettimeofday.h"
 #include "clock_gettime.h"
 #include "cfunc.h"
-//#include "int128/Int128.h"
-#include "../portable/stub.h"
+#include "stub.h"
+#include "sys/posix_types.h"
+#include "sys/posix_stdio.h"
+
+inline
+const char* GetUnistdVersion()
+{	return "v1.4 (3 Feb 2026)"; // git tag -a v1.4 -m "16 Feb 2026"
+}
+
+// Disable gcc function signature extension:
+#ifndef __has_attribute
+#define   __attribute__(x)
+#endif
+//__attribute__((format (printf, 1, 2)))
+
+#undef MAX_PRIORITY /* remove winspool.h warning */
+#define SSIZE_MAX SIZE_MAX
+#define SIGTRAP 23
 
 CFUNC const char* optarg;
 CFUNC int optind;
@@ -64,38 +72,36 @@ CFUNC int opterr;
 CFUNC int optopt;
 
 typedef long long useconds_t;
-typedef unsigned int  uint;
+typedef unsigned int uint;
 
-enum 
-{	F_LOCK=1,
-	F_TLOCK,
-	F_ULOCK,
-	F_TEST 
-};
-
-//CFUNC pid_t getpgrp(...); /* POSIX.1 version */
+#ifdef _BSD_SOURCE
 CFUNC pid_t getpgrp(pid_t pid); /* BSD version */
-CFUNC int setpgrp(pid_t pid, pid_t pgid); 
-CFUNC int read(int fh, void* buf, unsigned count);
+//CFUNC int fcntl(int handle,int mode,int mode2);
+#else
+CFUNC pid_t getpgrp(); /* POSIX.1 version */
+//CFUNC int fcntl(int handle, int mode,...);
+#endif
+
+CFUNC int setpgrp(pid_t pid, pid_t pgid);
 CFUNC int pipe(int pipes[2]);
 //CFUNC int uni_open(const char* filename,unsigned oflag,int mode);
-CFUNC int uni_open(const char* filename, unsigned oflag,...);
-CFUNC int fcntl(int handle, int mode,...);
+//CFUNC int uni_open(const char* filename, unsigned oflag,...);
+//CFUNC int fcntl(int handle, int mode,...);
 //CFUNC int fcntl(int handle,int mode,int mode2);
-
+CFUNC int setpgrp(pid_t pid, pid_t pgid);
 CFUNC int mkdir2(const char* path, int mask);
 CFUNC int snprintb(char *buf, size_t buflen, const char *fmt, uint64_t val);
 CFUNC int snprintb_m(char *buf, size_t buflen, const char *fmt, uint64_t val,size_t max);
 CFUNC size_t unistd_safe_strlen(const char* s);
 CFUNC int uni_sscanf(char* input,const char* format,...);
 CFUNC int strncasecmp(const char *s1, const char *s2, size_t n);
-CFUNC FILE *popen(const char *command, const char *type);
-CFUNC int pclose(FILE *stream);
+//CFUNC FILE *popen(const char *command, const char *type);
+//CFUNC int pclose(FILE *stream);
 CFUNC int kill(pid_t p, int x);
-CFUNC int S_ISCHR(int v); 
-CFUNC int S_ISBLK(int v); 
-CFUNC int S_ISFIFO(int v); 
-CFUNC int S_ISSOCK(int v); 
+CFUNC int S_ISCHR(int v);
+CFUNC int S_ISBLK(int v);
+CFUNC int S_ISFIFO(int v);
+CFUNC int S_ISSOCK(int v);
 CFUNC pid_t gettid();
 CFUNC int setgid(gid_t g);
 CFUNC int setuid(uid_t g);
@@ -164,60 +170,108 @@ CFUNC int ftruncate(int fd, off_t length);
 CFUNC int fseeko(FILE *stream, off_t offset, int whence);
 CFUNC off_t ftello(FILE *stream);
 CFUNC char* strptime(const char* s, const char* format,struct tm* tm);
+CFUNC ssize_t getline(char** lineptr, size_t* n,FILE* stream);
+CFUNC ssize_t getdelim(char** lineptr, size_t* n,int delim, FILE* stream);
+CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
+
+inline
+void bzero(void *s, size_t n)
+{	memset(s, 0, n);
+}
+
+inline
+double pow10(double x)
+{	return pow(x,10);
+}
+
+inline
+char *strdup(const char *s)
+{	return _strdup(s);
+}
+
+//Already in Win32: CFUNC int chmod(const char *path, mode_t mode);
 CFUNC ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset);
 CFUNC int setlinebuf(FILE *stream);
 CFUNC int vasprintf(char **strp, const char *fmt, va_list ap);
 CFUNC int aprintf(char **ret, const char *format, ...);
 
-
-//#define strlen unistd_safe_strlen
-//#define inet_ntop InetNtop
-#define bzero(address,size) memset((address),0,size)
-#define bcmp(s1, s2, n)	memcmp ((s1), (s2), (n))
-#define bcopy(s, d, n)	memcpy ((d), (s), (n))
-#define pow10(x) pow(x,10)
-#define alloca _alloca
 /* use with limits.h */
-#define LONG_LONG_MAX LLONG_MAX     
-#define LONG_LONG_MIN LLONG_MIN     
-#define strdup _strdup
-//#define sscanf uni_sscanf
-#undef MAX_PRIORITY /* remove winspool.h warning */
-#ifndef strcasecmp
-#define strcasecmp _stricmp
-#endif
-#define strncasecmp _strnicmp
-#define strtok_r strtok_s
-//#define send send2
-#define lstat stat
-#define fileno _fileno
-#define STDIN_FILENO _fileno(stdin)
-#define STDOUT_FILENO _fileno(stdout)
-#define STDERR_FILENO _fileno(stderr)
+#define LONG_LONG_MAX LLONG_MAX
+#define LONG_LONG_MIN LLONG_MIN
 
+inline
+int unlink(const char *path)
+{	return _unlink(path);
+}
+
+inline
+int rmdir(const char *path)
+{	return _rmdir(path);
+}
+
+inline
+int isatty(int fd)
+{	return _isatty(fd);
+}
+
+inline
+char *getcwd(char* buf, int size)
+{	return _getcwd(buf,size);
+}
+
+inline
+int dup(int oldfd)
+{	return _dup(oldfd);
+}
+
+inline
+int dup2(int oldfd, int newfd)
+{	return _dup2(oldfd,newfd);
+}
+
+inline
+int chdir(const char *path)
+{	return _chdir(path);
+}
+
+
+inline
+int access(const char *path, int mode)
+{	return _access(path,mode);
+}
+
+inline
+int pipe(int* pipes)
+{	return _pipe((pipes),8*1024,_O_BINARY);
+}
+
+inline
+int open(const char *filename, int oflag, ...)
+{	return _open(filename, oflag, 0); //mode is third arg
+}
+
+inline
+int close(int fd)
+{	return _close(fd);
+}
+
+CFUNC int lstat(const char *path,struct stat *statbuf);
+CFUNC int fstat(int fd, struct stat* st);
+
+#define spawnvpe _spawnvpe
+#define spawnvp _spawnvp
+#define spawnve _spawnve
+#define spawnv _spawnv
+#define strcmpi _stricmp
+#define strcasecmp _stricmp
+#define isascii(c) ((unsigned)(c) < 0x80)
 
 // causes issues with math.h:
 //#define rint(x) floor ((x) + 0.5)
 //#define lround floor
 //#define roundl floor
-// The POSIX name for this item is deprecated by MSVC:
 
-#define write _write
-#define unlink _unlink
-#define rmdir _rmdir
-#define lseek _lseek
-#define isatty _isatty
-#define getcwd _getcwd
-#define dup2 _dup2
-#define dup _dup
-#define close _close
-#define chdir _chdir
-#define getpid _getpid
-#define RETSIGTYPE void
-#define access _access
-#define   __attribute__(x)
-#define mkdir mkdir2
-#define fileno _fileno
+// The POSIX name for this item is deprecated by MSVC:
 
 // Defined unsupported macro as empty.
 #define __builtin_unreachable()
@@ -226,15 +280,14 @@ CFUNC int aprintf(char **ret, const char *format, ...);
 #undef min
 #undef max
 #undef close
-#undef CONST
-#undef ERROR
+//#undef CONST
+//#undef ERROR
 #undef IGNORE
 #undef STATUS_INVALID_HANDLE
 #undef STATUS_INVALID_PARAMETER
 #undef Yield
 #undef CompareString
 #undef NO_ERROR
-#undef write
 
 #if _MSC_VER < 1930
 // Workaround negative character values that caused asserts on VS 2019 and below

@@ -12,7 +12,7 @@
 //#include <list>
 //#include <string>
 #include "dirent.h"
-#include "../portable/Finder.h"
+#include "Finder.h"
 
 #define SUFFIX	'*'
 #define	SLASH	'\\'

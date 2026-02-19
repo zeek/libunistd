@@ -18,5 +18,7 @@
 #define XATTR_SIZE_MAX 65536
 #define XATTR_LIST_MAX 65536
 #define RTSIG_MAX	  32
+#define LONG_LONG_MAX LLONG_MAX     
+#define LONG_LONG_MIN LLONG_MIN   
 
 #endif

@@ -5,9 +5,10 @@
 #ifndef gettimeofday_h
 #define gettimeofday_h
 
-#include "../portable/stub.h"
+#include "stub.h"
 #include "cfunc.h"
 
+typedef long long useconds_t;
 CFUNC int gettimeofday(struct timeval* tv, struct timezone* tz);
 CFUNC int settimeofday(const struct timeval *tv, const struct timezone *tz);
 

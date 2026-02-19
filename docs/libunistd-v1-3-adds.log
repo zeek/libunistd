@@ -1,0 +1,47 @@
+8b9d701 Added vasprintf
+8dc1661 Added getline.cpp
+8b3dc70 Added sources.cmake after Wojtulewicz merge
+28a26a3 Add new files to unistd/CMakeLists.txt
+32498fe Add empty stub file for netinet/in_systm.h
+55e56b8 Add implmentation of gethostbyname2(3)
+d1a7ba9 Add implementation of getrusage(2) and associated types
+1478cf8 Add implementation of getrandom()
+f99e35b Add implementation of flock(2)
+20f4265 Add netinet/{icmp6,tcp,udp}.h
+9a53615 Add net/if_arp.h for struct arphdr
+1971c08 Add net/ethertypes.h for a few ETHERTYPE_ definitions
+1c7e9bd Add implementation of memmem(3)
+40ac75a Add stubs for fts_open(3), fts_read(3), and fts_close(3)
+daf496a Add implementation of fnmatch(3)
+31718c9 Add arpa/nameser.h
+cfc713e Add implementation of vsyslog()
+b57c1b9 Added getopt, disabled uni_sscanf (broken)
+2320a27 Add test_logger, fix tty_msg()
+33815f4 Add use-libunistd.cmake
+1540d5b Added syslog.h
+d808b6b Add cmaker_no_spaces.sh, git_upstream.md
+6f0c59d Add cmaker_no_spaces.sh, git_upstream.md
+aa824ce Add cmaker_redo.sh
+d172eed Add cmaker_all.sh, cmaker_c_to_cpp.sh, cmaker_rename_cpp.sh
+67feb5a Add cmaker_to_cpp.sh
+c2be907 Add curl-config.cmake
+5adf3a3 Added INSTALL_curl_Windows.md
+a0fd868 Added libssh2-config.cmake
+fdf2748 Added zlib-config.cmake
+bcfeb57 Add Doxyfile
+3ca8f99 Add cmaker_top.sh
+51ba9a8 Add CodingStyle.md
+703578a Add CodingStyle.md
+1aa010b Add README.md
+907f841 Add README.md
+c68b6e2 Add cmaker_project.sh.txt
+6319a0e Add cmaker_sources.sh: AddPath
+b69ba5d Add cmaker_sources.sh
+d47582f Add FInder.h, scandir.cpp, semaphore1.cpp, rewrite dirent.cpp
+4d2b01d Added linux/limits.h, fixed scandir segfault
+c658fba Add sys/sem.h, test/semaphore, SharedMemory.h, FixedQueue.h
+55ecd80 added option to switch building tests on or off, setting it off by default
+fe18c84 add sys/param.h
+0efab29 add cmaker_legacy.sh
+d65b218 Cmaker <NAME>, add BsdSocketStartup.cpp, add portable/string.h
+fbe1946 Cmaker add cmaker_dll.sh
