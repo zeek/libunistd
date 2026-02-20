@@ -22,6 +22,7 @@ static inline int write_all(int fd, const void *buf, size_t count)
 
 		errno = 0;
 #pragma warning(disable : 4996)
+#pragma warning(disable : 4244)
 		tmp = write(fd, buf,(unsigned int) count);
 		if (tmp > 0) {
 			count -= tmp;

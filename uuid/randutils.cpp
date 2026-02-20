@@ -53,7 +53,8 @@ int random_get_fd(void)
 	/* Crank the random number generator a few times */
 	gettimeofday(&tv, 0);
 	for (i = (tv.tv_sec ^ tv.tv_usec) & 0x1F; i > 0; i--)
-		rand();
+	{	(void) rand();
+	}
 	return fd;
 }
 
@@ -78,6 +79,7 @@ void random_get_bytes(void *buf, size_t nbytes)
 					break;
 				continue;
 			}
+#pragma warning(disable : 4244)
 			n -= x;
 			cp += x;
 			lose_counter = 0;
