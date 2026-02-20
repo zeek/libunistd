@@ -12,7 +12,7 @@
 //#include <list>
 //#include <string>
 #include "dirent.h"
-#include "../portable/Finder.h"
+#include "Finder.h"
 
 #define SUFFIX	'*'
 #define	SLASH	'\\'
@@ -51,7 +51,7 @@ int readdir_r(DIR *dir, struct dirent*, struct dirent** entry)
 	if(!dir)
 	{	errno = EFAULT;
 		return 0;
-	}	
+	}
 	Finder* finder = (Finder*) dir;
 	if(!finder->Read())
 	{	if(finder->IsEof())
@@ -196,7 +196,7 @@ int scandir(const char* path, dirent*** namesList, scandir_f selector, scandir_a
 		matches++;
 	}
 	closedir(dir);
-	if(sorter) 
+	if(sorter)
 	{	qsort(names, matches, sizeof(dirent*),alphaqsort);
 	}
 	return matches;

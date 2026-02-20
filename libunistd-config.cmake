@@ -40,7 +40,7 @@ if(WIN32)
 	set(CMAKE_STATIC_LIBRARY_PREFIX "")
     set(CMAKE_STATIC_LIBRARY_SUFFIX ".lib")
 else(WIN32)
-	set(CMAKE_STATIC_LIBRARY_PREFIX "lib")    
+	set(CMAKE_STATIC_LIBRARY_PREFIX "lib")
 	set(CMAKE_STATIC_LIBRARY_SUFFIX ".a")
 endif(WIN32)
 
@@ -48,21 +48,21 @@ endif(WIN32)
 
 if(${LIBUNISTD_DOWNLOAD})
 	set(LIBUNISTD_LIB_DIRS ${CMAKE_CURRENT_LIST_DIR})
-# Adjusting LIBUNISTD_DOWNLOAD path 
+# Adjusting LIBUNISTD_DOWNLOAD path
 #   C:/Code/gitlab/ccLater/build/x64/libunistd/libunistd-src...
 #   /c/code/gitlab/cclater/build/x64/build/x64/libunistd/libunistd-src/unistd/Debug/libunistd.lib
 	message(" Using LIBUNISTD_DOWNLOAD path ${LIBUNISTD_LIB_DIRS}")
 	set(LIBUNISTD_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/unistd)
-	set(LIBUNISTD_LIB_DIRS 
+	set(LIBUNISTD_LIB_DIRS
 		debug ${LIBUNISTD_LIB_DIRS}/build/x64/unistd/Debug
-		optimized ${LIBUNISTD_LIB_DIRS}/build/x64/unistd/Release ) 
+		optimized ${LIBUNISTD_LIB_DIRS}/build/x64/unistd/Release )
 else(${LIBUNISTD_DOWNLOAD})
 	set(LIBUNISTD_LIB_DIRS ${CMAKE_CURRENT_LIST_DIR})
 	message(" Using local libunistd path ${LIBUNISTD_LIB_DIRS}")
 	set(LIBUNISTD_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/unistd)
-	set(LIBUNISTD_LIB_DIRS 
+	set(LIBUNISTD_LIB_DIRS
 		debug ${LIBUNISTD_LIB_DIRS}/build/x64/Debug
-		optimized ${LIBUNISTD_LIB_DIRS}/build/x64/Release ) 
+		optimized ${LIBUNISTD_LIB_DIRS}/build/x64/Release )
 endif(${LIBUNISTD_DOWNLOAD})
 
 if(WIN32)
@@ -72,12 +72,3 @@ if(WIN32)
 	message(" LIBUNISTD_LIBRARIES = ${LIBUNISTD_LIBRARIES}")
 	message(" LIBUNISTD_LIB_DIRS = ${LIBUNISTD_LIB_DIRS}")
 endif(WIN32)
-
-set(LIBPORTABLE_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR})
-set(LIBPORTABLE_LIBRARIES libuuid liblmdb libregex libsqlite libxxhash libportable )
-set(LIBPORTABLE_LIB_DIRS ${LIBUNISTD_LIB_DIRS})
-
-message("--- libportable paths ---")
-message(" LIBPORTABLE_INCLUDE_DIRS = ${LIBPORTABLE_INCLUDE_DIRS}")
-message(" LIBPORTABLE_LIBRARIES = ${LIBPORTABLE_LIBRARIES}")
-message(" LIBPORTABLE_LIB_DIRS = ${LIBPORTABLE_LIB_DIRS}")

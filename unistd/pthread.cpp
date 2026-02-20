@@ -3,7 +3,7 @@
 // License MIT open source
 
 #include "pthread.h"
-#include "../portable/Logger.h"
+#include "SystemLog.h"
 
 #include <thread>
 #include <system_error>
@@ -18,7 +18,7 @@ public:
 
 struct PortableThread
 :	public std::thread
-{	
+{
 public:
 	pthread_attr_t attr;
 	PortableThread(const pthread_attr_t *attr,void *(*start_routine) (void *), void *arg)
@@ -39,7 +39,7 @@ int pthread_setschedparam(pthread_t pthread, int policy, const sched_param* para
 #ifdef VERBOSE_PTHREAD
 
 int uni_pthread_create(pthread_t* pthread, const pthread_attr_t *attr,void *(*start_routine) (void *), void *arg,const char* name)
-{	SysLogMsg("Thread",name); 
+{	SysLogMsg("Thread",name);
 	PortableThread* t=new PortableThread(attr,start_routine,arg);
 	*pthread=t;
 	if(!t->attr.isJoinable)
@@ -52,10 +52,10 @@ int uni_pthread_create(pthread_t* pthread, const pthread_attr_t *attr,void *(*st
 #else
 int pthread_create(pthread_t* pthread, const pthread_attr_t *attr,void *(*start_routine) (void *), void *arg)
 {	PortableThread* t=0;
-    try 
+    try
 	{	t = new PortableThread(attr,start_routine,arg);
-    } 
-	catch(const std::system_error& e) 
+    }
+	catch(const std::system_error& e)
 	{	printf("Caught system_error %s\n",e.what());
 		return -1;
     }
@@ -94,10 +94,10 @@ int pthread_join(pthread_t thread, void **retval)
 	if(!thread->attr.isJoinable)
 	{	return -1;
 	}
-    try 
+    try
 	{	thread->join();
-    } 
-	catch(const std::system_error& e) 
+    }
+	catch(const std::system_error& e)
 	{	printf("Caught system_error %s\n",e.what());
 		return -1;
     }

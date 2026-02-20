@@ -11,7 +11,7 @@
 #error unistd.h must be included before Windows.h!
 #endif
 
-//#define _CRT_SECURE_NO_DEPRECATE 
+//#define _CRT_SECURE_NO_DEPRECATE
 //#undef _CRT_SECURE_NO_WARNINGS
 //#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #ifndef _CRT_NONSTDC_NO_WARNINGS
@@ -50,7 +50,7 @@
 #include <assert.h>
 #include <inttypes.h>
 #include <io.h>
-#include "../portable/bsd_string.h"
+#include "bsd_string.h"
 #include "sigaction.h"
 #include "gettimeofday.h"
 #include "clock_gettime.h"
@@ -66,16 +66,16 @@ CFUNC int optopt;
 typedef long long useconds_t;
 typedef unsigned int  uint;
 
-enum 
+enum
 {	F_LOCK=1,
 	F_TLOCK,
 	F_ULOCK,
-	F_TEST 
+	F_TEST
 };
 
 //CFUNC pid_t getpgrp(...); /* POSIX.1 version */
 CFUNC pid_t getpgrp(pid_t pid); /* BSD version */
-CFUNC int setpgrp(pid_t pid, pid_t pgid); 
+CFUNC int setpgrp(pid_t pid, pid_t pgid);
 CFUNC int read(int fh, void* buf, unsigned count);
 CFUNC int pipe(int pipes[2]);
 //CFUNC int uni_open(const char* filename,unsigned oflag,int mode);
@@ -92,10 +92,10 @@ CFUNC int strncasecmp(const char *s1, const char *s2, size_t n);
 CFUNC FILE *popen(const char *command, const char *type);
 CFUNC int pclose(FILE *stream);
 CFUNC int kill(pid_t p, int x);
-CFUNC int S_ISCHR(int v); 
-CFUNC int S_ISBLK(int v); 
-CFUNC int S_ISFIFO(int v); 
-CFUNC int S_ISSOCK(int v); 
+CFUNC int S_ISCHR(int v);
+CFUNC int S_ISBLK(int v);
+CFUNC int S_ISFIFO(int v);
+CFUNC int S_ISSOCK(int v);
 CFUNC pid_t gettid();
 CFUNC int setgid(gid_t g);
 CFUNC int setuid(uid_t g);
@@ -178,8 +178,8 @@ CFUNC int aprintf(char **ret, const char *format, ...);
 #define pow10(x) pow(x,10)
 #define alloca _alloca
 /* use with limits.h */
-#define LONG_LONG_MAX LLONG_MAX     
-#define LONG_LONG_MIN LLONG_MIN     
+#define LONG_LONG_MAX LLONG_MAX
+#define LONG_LONG_MIN LLONG_MIN
 #define strdup _strdup
 //#define sscanf uni_sscanf
 #undef MAX_PRIORITY /* remove winspool.h warning */

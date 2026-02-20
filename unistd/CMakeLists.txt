@@ -10,7 +10,7 @@ else(_M_X64)
 endif(_M_X64)
 
 file(STRINGS sources.cmake SOURCES)
-add_library(libunistd 
+add_library(libunistd
 	${SOURCES}
 	int128/Int128.h
 	${INT128_SRC}
@@ -18,4 +18,3 @@ add_library(libunistd
 
 target_include_directories(libunistd PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(libunistd LINK_PUBLIC shlwapi)
-target_link_libraries(libunistd LINK_PUBLIC libportable)
