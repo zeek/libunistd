@@ -279,8 +279,8 @@ CFUNC int fstat(int fd, struct stat* st);
 #undef min
 #undef max
 #undef close
-//#undef CONST
-//#undef ERROR
+#undef CONST
+#undef ERROR
 #undef IGNORE
 #undef STATUS_INVALID_HANDLE
 #undef STATUS_INVALID_PARAMETER

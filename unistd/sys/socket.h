@@ -6,6 +6,7 @@
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
+#define CONST const
 // Windows SDKs (Vista → 11) changed rule, include windows.h first:
 // <windows.h> no longer includes <winsock.h>
 #include <windows.h>
