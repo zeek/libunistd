@@ -146,7 +146,6 @@ pid_t getpid()
 #define chdir _chdir
 #define getpid _getpid
 #define RETSIGTYPE void
-#define access _access
 #ifndef __has_attribute
 #define   __attribute__(x)
 #endif
