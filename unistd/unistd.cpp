@@ -141,21 +141,7 @@ int uni_sscanf(char* input,const char* format,...)
 }
 
 #undef MAX_PRIORITY /* remove winspool.h warning */
-#if 0
-int strncasecmp(const char *s1, const char *s2, size_t n)
-{	for(unsigned i=0;i<n;i++)
-	{	if(s1[i] == 0 && s2[i] == 0)
-		{	return 0;
-		}
-		if(s1[i] == 0 || s2[i] == 0)
-		{	return s1[i]<s2[i] ? -1:1;
-		}
-		if(tolower(s1[i])!=tolower(s2[i]))
-		{	return s1[i]<s2[i] ? -1:1;
-	}	}
-	return 0;
-}
-#endif
+
 int kill(pid_t p, int x)
 {	(void)p;
 	(void)x;

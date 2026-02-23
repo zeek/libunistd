@@ -94,7 +94,6 @@ CFUNC int snprintb(char *buf, size_t buflen, const char *fmt, uint64_t val);
 CFUNC int snprintb_m(char *buf, size_t buflen, const char *fmt, uint64_t val,size_t max);
 CFUNC size_t unistd_safe_strlen(const char* s);
 CFUNC int uni_sscanf(char* input,const char* format,...);
-CFUNC int strncasecmp(const char *s1, const char *s2, size_t n);
 //CFUNC FILE *popen(const char *command, const char *type);
 //CFUNC int pclose(FILE *stream);
 CFUNC int kill(pid_t p, int x);
