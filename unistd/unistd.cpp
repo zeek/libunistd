@@ -689,34 +689,6 @@ int fstat(int fd, struct stat* st)
     return 0;
 }
 
-#if 0
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <errno.h>
-
-int stat(const char *path, struct stat *buf)
-{   struct _stat64 wbuf;
-    int rc = _stat64(path, &wbuf);
-    if (rc != 0)
-	{	return -1;
-    }
-    // Copy fields into POSIX struct stat
-    buf->st_dev   = (dev_t)wbuf.st_dev;
-    buf->st_ino   = (ino_t)wbuf.st_ino;
-    buf->st_mode  = (mode_t)wbuf.st_mode;
-    buf->st_nlink = (nlink_t)wbuf.st_nlink;
-    buf->st_uid   = (uid_t)0;       // Windows does not provide POSIX uid
-    buf->st_gid   = (gid_t)0;       // Windows does not provide POSIX gid
-    buf->st_rdev  = (dev_t)wbuf.st_rdev;
-    buf->st_size  = (off_t)wbuf.st_size;
-    buf->st_atime = (time_t)wbuf.st_atime;
-    buf->st_mtime = (time_t)wbuf.st_mtime;
-    buf->st_ctime = (time_t)wbuf.st_ctime;
-    return 0;
-}
-
-#endif
-
 ssize_t pwrite(int fildes, const void *buf, size_t nbyte, off_t offset)
 {	if (nbyte == 0)
 	{	return 0;

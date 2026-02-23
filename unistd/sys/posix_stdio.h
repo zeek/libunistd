@@ -75,9 +75,8 @@ typedef unsigned long nlink_t;
 typedef long blksize_t;
 typedef long long blkcnt_t;
 
-#if 0
-struct stat 
-{// same as _stat64
+struct stat
+{// same as _stat64 with two added block-related fields at the end
     _dev_t         st_dev;
     _ino_t         st_ino;
     unsigned short st_mode;
@@ -89,23 +88,8 @@ struct stat
     __time64_t     st_atime;
     __time64_t     st_mtime;
     __time64_t     st_ctime;
-};
-#endif
-
-struct stat {
-    dev_t     st_dev;
-    ino_t     st_ino;
-    mode_t    st_mode;
-    nlink_t   st_nlink;
-    uid_t     st_uid;
-    gid_t     st_gid;
-    dev_t     st_rdev;
-    off_t     st_size;
-    time_t    st_atime;
-    time_t    st_mtime;
-    time_t    st_ctime;
-    blksize_t st_blksize;   
-    blkcnt_t  st_blocks;    
+    blksize_t st_blksize;
+    blkcnt_t  st_blocks;
 };
 
 inline
