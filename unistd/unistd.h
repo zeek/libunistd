@@ -57,9 +57,7 @@ const char* GetUnistdVersion()
 }
 
 // Disable gcc function signature extension:
-#ifndef __has_attribute
 #define   __attribute__(x)
-#endif
 //__attribute__((format (printf, 1, 2)))
 
 #undef MAX_PRIORITY /* remove winspool.h warning */
@@ -252,6 +250,10 @@ int open(const char *filename, int oflag, ...)
 inline
 int close(int fd)
 {	return _close(fd);
+}
+
+inline int umask(int pmode)
+{ return _umask(pmode);
 }
 
 CFUNC int lstat(const char *path,struct stat *statbuf);
