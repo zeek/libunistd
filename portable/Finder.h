@@ -14,8 +14,6 @@
 #include <strsafe.h>
 #include <string>
 
-#pragma comment(lib, "User32.lib")
-
 #define WIN_NO_ERROR 0 // WIN_NO_ERROR = NO_ERROR As we are undeffing `NO_ERROR` to avoid naming collision in unistd.h
 
 namespace portable {
