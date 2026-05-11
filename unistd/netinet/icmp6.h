@@ -41,4 +41,13 @@ struct icmp6_hdr
 };
 #pragma pack(pop)
 
+#define icmp6_data32 icmp6_dataun.icmp6_un_data32
+#define icmp6_data16 icmp6_dataun.icmp6_un_data16
+#define icmp6_data8 icmp6_dataun.icmp6_un_data8
+#define icmp6_pptr icmp6_data32[0]     /* parameter prob */
+#define icmp6_mtu icmp6_data32[0]      /* packet too big */
+#define icmp6_id icmp6_data16[0]       /* echo request/reply */
+#define icmp6_seq icmp6_data16[1]      /* echo request/reply */
+#define icmp6_maxdelay icmp6_data16[0] /* mcast group membership */
+
 #endif
