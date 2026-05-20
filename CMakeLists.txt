@@ -1,6 +1,6 @@
 # libunistd/CMakeList.txt
 
-cmake_minimum_required (VERSION 3.0.0)
+cmake_minimum_required (VERSION 3.15.0)
 project(libunistd)
 message("<<< Parsing libunistd/CMakeList.txt")
 message("--- Building ${PROJECT_NAME} ${CMAKE_SYSTEM_NAME}:${CMAKE_HOST_SYSTEM_PROCESSOR}:${CMAKE_GENERATOR_TOOLSET} ---")
